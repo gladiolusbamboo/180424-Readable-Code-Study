@@ -20,7 +20,7 @@ const onSuccess = function(responseData){
 }
 
 const formatPretty = function(obj){
-  // 機能の追加が容易にできる
+  // 機能の追加も容易にできる
   // null・undefined・文字列・非オブジェクトを処理する
   if(obj === null) return "null";
   if(obj===undefined) return "undefined";
