@@ -219,3 +219,43 @@ function addScoredDoc(docs, score) {
 function scoredDocsToString(docs) {
   // 省略
 }
+
+/*******************
+ 改善７
+********************/
+// テストする関数に適切な名前をつける
+function test_checkScoresBeforeAfter() {
+  checkScoresBeforeAfter("2, 1, 3", "3, 2, 1");   // ソート
+  checkScoresBeforeAfter("0, -0.1, -10", "0");    // マイナスは削除
+  checkScoresBeforeAfter("1, -2, 1, -2", "1, 1"); // 重複を許可する
+  checkScoresBeforeAfter("", "");                 // 空の入力を許可する
+}
+
+function checkScoresBeforeAfter(input, expected_output) {
+  let docs = scoredDocsFromString(input);
+  sortAndFilterDocs(docs);
+  const output = scoredDocsToString(docs);
+  if (output != expected_output) {
+    console.error('checkScoresBeforeAdter() Error')
+    console.error(`input = ${input}`)
+    console.error(`expected_output = ${expected_output}`)
+    console.error(`Actual output = ${output}`)
+  }
+}
+
+function scoredDocsFromString(scores) {
+  let docs = new Array();
+  let array = convertStringToArray(scores);
+  for (let i = 0; i < array.length; i++) {
+    addScoredDoc(docs, array[i]);
+  }
+  return docs;
+}
+
+function addScoredDoc(docs, score) {
+  docs.push(new ScoredDocument(score, "http://example.com"));
+}
+
+function scoredDocsToString(docs) {
+  // 省略
+}
